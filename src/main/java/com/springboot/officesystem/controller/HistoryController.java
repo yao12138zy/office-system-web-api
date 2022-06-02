@@ -25,17 +25,19 @@ public class HistoryController {
 
     @Autowired
     private HistoryService historyService;
+
     @Autowired
     private UserService userService;
-
 
     @PostMapping("/add")
     public History addHistory(@RequestBody History history){
         User user = userService.getUserById(history.getHistoryPK().getHistoryUserId());
-        if (user == null ) { throw new ResponseStatusException(HttpStatus.NOT_FOUND, "history_user_id is not found"); }
+        if (user == null) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "user id is not found");
+        }
         History newHistory = history;
-        history.setHistoryPK(history.getHistoryPK());
         history.setUser(user);
+        history.setHistoryPK(history.getHistoryPK());
         newHistory.setLoginTime(history.getLoginTime());
         newHistory.setLogoutTime(history.getLogoutTime());
         return historyService.addHistory(newHistory);
@@ -48,8 +50,8 @@ public class HistoryController {
 
     @GetMapping("/getHistories/id/{id}")
     public List<History> getHistoriesByUser(@PathVariable("id") Long id){
-        User user = userService.getUserById(id);
-        if (user == null) {
+        Boolean exist = historyService.historyUserIdExist(id);
+        if (!exist) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "user id is not found");
         }
         return historyService.getHistoriesByUser(id);

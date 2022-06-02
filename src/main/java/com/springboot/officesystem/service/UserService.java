@@ -16,4 +16,6 @@ public interface UserService {
 
     public List<User> getAccount(Boolean type);
 
+    public User getUserByUsername(String username);
+
 }

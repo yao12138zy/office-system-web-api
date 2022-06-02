@@ -20,6 +20,9 @@ public class HistoryServiceImpl implements HistoryService{
     @Autowired
     private HistoryRepository historyRepository;
 
+    @Autowired
+    private UserRepository userRepository;
+
     @Override
     public History addHistory(History history) {
         return historyRepository.save(history);
@@ -56,4 +59,8 @@ public class HistoryServiceImpl implements HistoryService{
         return historyRepository.save(history);
     }
 
+    @Override
+    public Boolean historyUserIdExist(Long id) {
+        return userRepository.existsById(id);
+    }
 }

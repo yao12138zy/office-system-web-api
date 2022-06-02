@@ -75,4 +75,8 @@ public class UserServiceImpl implements UserService{
         } else { return userRepository.getManagerAccounts(); }
     }
 
+    @Override
+    public User getUserByUsername(String username) {
+        return userRepository.getUserByUsername(username);
+    }
 }

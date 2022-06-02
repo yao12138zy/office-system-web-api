@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.Date;
+import java.util.List;
 
 @RestController
 @RequestMapping("/request")
@@ -44,9 +45,35 @@ public class RequestController {
         requestService.submitRequest(request);
         return request;
     }
-    
 
+    @PostMapping("/answer")
+    public Request answer(@RequestParam("requestId") Long requestId,
+                          @RequestParam("decision") String decision
+    ){
+        Request request = requestService.answerRequest(decision,requestId);
+        if (request == null) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "request is not found");
+        }
+        return request;
+    }
 
+    @GetMapping("/getRequest/{id}")
+    public Request getRequestById(@PathVariable("id") Long id){
+        Request request = requestService.getRequestById(id);
+        if (request == null) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "request is not found");
+        }
+        return request;
+    }
 
+    @GetMapping("/getRequest/receiver/{id}")
+    public List<Request> getRequestByReceiver(@PathVariable("id") Long id){
+        return requestService.getRequestByReceiver(id);
+    }
+
+    @GetMapping("/getRequest/sender/{id}")
+    public List<Request> getRequestBySender(@PathVariable("id") Long id){
+        return requestService.getRequestBySender(id);
+    }
 
 }

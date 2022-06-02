@@ -14,12 +14,11 @@ public interface HistoryService {
 
     public History addHistory(History history);
     public List<History> getAllHistory();
-
-
     public List<History> getHistoriesByUser(Long userId);
     public List<History> getHistoriesByDate(Date date);
     public History onWork(Date date, Long userId, Date loginTime);
     public History offWork(Date date, Long userId, Date logoutTime);
 
+    public Boolean historyUserIdExist(Long id);
 
 }

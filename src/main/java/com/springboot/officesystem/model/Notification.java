@@ -17,12 +17,12 @@ public class Notification {
 
     @ManyToOne
     @JsonIgnore
-    @JoinColumn(name = "notification_sender_user", nullable = false)
+    @JoinColumn(name = "notification_sender_user")
     private User notificationSender;
 
     @ManyToOne
     @JsonIgnore
-    @JoinColumn(name = "notification_receiver_user",nullable = false)
+    @JoinColumn(name = "notification_receiver_user")
     private User notificationReceiver;
 
     private Boolean readed;

@@ -17,6 +17,8 @@ public interface UserRepository extends JpaRepository<User, Long> {
     @Query("SELECT u FROM User u WHERE u.accountType = true")
     public List<User> getManagerAccounts ();
 
+    @Query("SELECT u FROM User u WHERE u.username = :username")
+    public User getUserByUsername(String username);
 
 
 }

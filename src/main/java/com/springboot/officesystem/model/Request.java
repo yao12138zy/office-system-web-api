@@ -17,12 +17,12 @@ public class Request {
 
     @ManyToOne
     @JsonIgnore
-    @JoinColumn(name = "request_sender_user", nullable = false)
+    @JoinColumn(name = "request_sender_user")
     private User requestSender;
 
     @ManyToOne
     @JsonIgnore
-    @JoinColumn(name = "request_receiver_user",nullable = false)
+    @JoinColumn(name = "request_receiver_user")
     private User requestReceiver;
 
     private String requestType;

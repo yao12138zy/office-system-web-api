@@ -1,4 +1,5 @@
 package com.springboot.officesystem.controller;
+import com.springboot.officesystem.model.History;
 import com.springboot.officesystem.model.User;
 import com.springboot.officesystem.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,10 +19,7 @@ public class UserController {
     private UserService userService;
 
     @PostMapping("/add")
-    public User add(){
-        User user = new User();
-        user.setPassword("admin");
-        user.setUsername("admin");
+    public User add(@RequestBody User user){
         return userService.addUser(user);
     }
     @GetMapping("/getAll")
@@ -85,6 +83,15 @@ public class UserController {
         } else {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "ID is not found");
         }
+    }
+
+    @GetMapping("/getUser/{username}")
+    public User getUserByUsername(@PathVariable("username") String username){
+        User user = userService.getUserByUsername(username);
+        if  (user == null){
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "username is not found");
+        }
+        return user;
     }
 
 

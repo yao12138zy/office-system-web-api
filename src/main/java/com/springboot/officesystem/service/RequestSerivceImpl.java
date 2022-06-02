@@ -43,7 +43,7 @@ public class RequestSerivceImpl implements RequestService {
     }
 
     @Override
-    public Request createEmptyRequest() { return new Request(); }
-
-
+    public Request getRequestById(Long requestId) {
+        return requestRepository.findById(requestId).orElse(null);
+    }
 }

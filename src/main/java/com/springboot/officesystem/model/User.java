@@ -15,13 +15,14 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name= "user_id",updatable = false)
+    @Column(name= "user_id", updatable = false)
     private Long userId;
-    @Column(unique = true,nullable = false)
+    @Column(unique = true)
     private String username;
+
     @Column(nullable = false)
     private String password;
-    @Column(updatable = false,nullable = false)
+    @Column(nullable = false, updatable = false)
     private Boolean accountType;  // 1 for manager, 0 for worker
     private String lastname;
     private String firstname;
